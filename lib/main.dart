@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jumia_auth/features/auth/email/auth_email.dart';
 import 'package:jumia_auth/features/auth/email/email_signup.dart';
+import 'package:jumia_auth/providers/user_provider.dart';
 import 'package:jumia_auth/route.dart';
 import 'package:jumia_auth/features/auth/email/auth_email.dart';
+import 'package:provider/provider.dart';
 import 'constants/global_variables.dart';
 
 void main() {
-  runApp(MyApp());
+ runApp(MultiProvider(providers: [ChangeNotifierProvider(create: (context)=> UserProvider())], child:  MyApp()));
 }
 
 class MyApp extends StatefulWidget {

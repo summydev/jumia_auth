@@ -4,6 +4,7 @@ import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:jumia_auth/features/auth/email/email_login.dart';
 import 'package:jumia_auth/features/auth/email/email_signup.dart';
+import 'package:jumia_auth/features/services/auth_services.dart';
 
 class AuthEmailScreen extends StatefulWidget {
   static const routeName = '/authemail';
@@ -16,6 +17,11 @@ class AuthEmailScreen extends StatefulWidget {
 class _AuthEmailScreenState extends State<AuthEmailScreen> {
   final TextEditingController _emailcontroller = TextEditingController();
   late final String authEmail = _emailcontroller.text;
+  AuthService authService = AuthService();
+
+  void checkUser() {
+    authService.checkUser(context: context, email: _emailcontroller.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +76,15 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                       height: 40,
                     ),
                     CustomButton(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EmailSignup(
-                                      authEmail: authEmail,
-                                    )),
-                          );
+                        onTap: () async {
+                          checkUser();
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => EmailSignup(
+                          //             authEmail: authEmail,
+                          //           )),
+                          // );
                         },
                         text: 'Continue'),
                     TextButton(

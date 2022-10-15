@@ -3,6 +3,7 @@ import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:jumia_auth/features/auth/email/auth_email.dart';
+import 'package:jumia_auth/features/services/auth_services.dart';
 
 class EmailSignup extends StatefulWidget {
   static const routeName = '/emailsignup';
@@ -15,6 +16,31 @@ class EmailSignup extends StatefulWidget {
 
 class _EmailSignupState extends State<EmailSignup> {
   final TextEditingController _passwordcontroller = TextEditingController();
+  final _signUpFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print(widget.authEmail);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    _passwordcontroller.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpuser(
+      context: context,
+      email: widget.authEmail,
+      password: _passwordcontroller.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,30 +89,47 @@ class _EmailSignupState extends State<EmailSignup> {
                     SizedBox(
                       height: 40,
                     ),
-                    IdentityContainer(
-                        identityInfo: widget.authEmail,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AuthEmailScreen()),
-                          );
-                        }),
-                    SizedBox(
-                      height: 30,
+                    Container(
+                      child: Form(
+                        key: _signUpFormKey,
+                        child: Column(
+                          children: [
+                            IdentityContainer(
+                                identityInfo: widget.authEmail,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AuthEmailScreen()),
+                                  );
+                                }),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CustomTextField(
+                                controller: _passwordcontroller,
+                                hintText: 'Password'),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CustomTextField(
+                                controller: _passwordcontroller,
+                                hintText: 'Confirm Password'),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CustomButton(
+                                onTap: () {
+                                  if (_signUpFormKey.currentState!.validate()) {
+                                    signUpUser();
+                                  }
+                                },
+                                text: 'Continue'),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomTextField(
-                        controller: _passwordcontroller, hintText: 'Password'),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    CustomTextField(
-                        controller: _passwordcontroller,
-                        hintText: 'Confirm Password'),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    CustomButton(onTap: () {}, text: 'Continue'),
                     SizedBox(
                       height: 10,
                     ),

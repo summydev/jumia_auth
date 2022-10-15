@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
   firstName: {
-    required: true,
+    // required: true,
     type: String,
     trim: true,
   },
   middleName: {
-    required: true,
+    // required: true,
     type: String,
     trim: true,
   },
   lastName: {
-    required: true,
+    // required: true,
     type: String,
     trim: true,
   },
@@ -40,22 +40,22 @@ const userSchema = mongoose.Schema({
     },
   },
   gender: {
-    required: true,
+    // required: true,
     type: String,
     trim: true,
   },
   phoneNumber: {
-    required: true,
-    type: Number,
+    // required: true,
+    type: String,
     trim: true,
   },
   birthDay: {
-    required: true,
-    type: Date,
+    // required: true,
+    type: String,
   },
   pin: {
-    type: Number,
-    required: true,
+    type: String,
+    // required: true,
   },
   address: {
     type: String,
