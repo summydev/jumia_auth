@@ -7,6 +7,7 @@ import 'package:jumia_auth/constants/error_handling.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:jumia_auth/constants/utils.dart';
 import 'package:jumia_auth/features/auth/email/email_login.dart';
+import 'package:jumia_auth/features/auth/email/email_signup.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,13 +52,13 @@ class AuthService {
     } catch (e) {}
   }
 
-  void checkUser({
+  void checkUserExists({
     required BuildContext context,
     required String email,
   }) async {
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/api/authemai'),
+        Uri.parse('$uri/api/authemail'),
         body: jsonEncode({'email': email}),
         headers: <String, String>{
           "Content-Type": "application/json; charset=UTF-8",
@@ -65,18 +66,36 @@ class AuthService {
         },
       );
       print(res.statusCode);
-      httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => EmailSignin(
-                        authEmail: email,
-                      )),
-            );
-          });
+      if (res.statusCode == 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EmailSignin(
+                    authEmail: email,
+                  )),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EmailSignup(
+                    authEmail: email,
+                  )),
+        );
+      }
+      // httpErrorHandle(
+      //     response: res,
+      //     context: context,
+      //     onSuccess: () {
+      //       showSnackbar(context, 'login email exists');
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //             builder: (context) => EmailSignin(
+      //                   authEmail: email,
+      //                 )),
+      //       );
+      //     });
     } catch (e) {
       showSnackbar(context, e.toString());
     }

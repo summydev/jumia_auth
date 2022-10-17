@@ -20,7 +20,14 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
   AuthService authService = AuthService();
 
   void checkUser() {
-    authService.checkUser(context: context, email: _emailcontroller.text);
+    authService.checkUserExists(context: context, email: _emailcontroller.text);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailcontroller.dispose();
   }
 
   @override
@@ -78,6 +85,7 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                     CustomButton(
                         onTap: () async {
                           checkUser();
+                          print('pressed');
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(
