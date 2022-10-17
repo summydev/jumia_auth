@@ -65,8 +65,9 @@ class AuthService {
           //"Access-Control-Allow-Origin": "*",
         },
       );
+
       print(res.statusCode);
-      if (res.statusCode == 200) {
+      if (200== res.statusCode) {
         Navigator.push(
           context,
           MaterialPageRoute(

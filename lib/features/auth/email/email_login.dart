@@ -4,10 +4,9 @@ import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 
 class EmailSignin extends StatefulWidget {
-  static const routeName= '/emailsignin';
- final String authEmail;
+  static const routeName = '/emailsignin';
+  final String authEmail;
   const EmailSignin({required this.authEmail});
-
 
   @override
   State<EmailSignin> createState() => _EmailSigninState();
@@ -60,7 +59,7 @@ class _EmailSigninState extends State<EmailSignin> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: 40,
                     ),
                     IdentityContainer(

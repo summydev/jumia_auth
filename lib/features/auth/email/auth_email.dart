@@ -15,6 +15,7 @@ class AuthEmailScreen extends StatefulWidget {
 }
 
 class _AuthEmailScreenState extends State<AuthEmailScreen> {
+  final _authEmailFormKey = GlobalKey<FormState>();
   final TextEditingController _emailcontroller = TextEditingController();
   late final String authEmail = _emailcontroller.text;
   AuthService authService = AuthService();
@@ -77,24 +78,36 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                     SizedBox(
                       height: 40,
                     ),
-                    CustomTextField(
-                        controller: _emailcontroller, hintText: 'Email'),
-                    SizedBox(
-                      height: 40,
+                    Container(
+                      child: Form(
+                        key: _authEmailFormKey,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                                controller: _emailcontroller,
+                                hintText: 'Email'),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            CustomButton(
+                                onTap: () {
+                                  if (_authEmailFormKey.currentState!
+                                      .validate()) {
+                                    checkUser();
+                                  }
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => EmailSignup(
+                                  //             authEmail: authEmail,
+                                  //           )),
+                                  // );
+                                },
+                                text: 'Continue'),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomButton(
-                        onTap: () async {
-                          checkUser();
-                          print('pressed');
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => EmailSignup(
-                          //             authEmail: authEmail,
-                          //           )),
-                          // );
-                        },
-                        text: 'Continue'),
                     TextButton(
                       onPressed: () {},
                       child: Text(
