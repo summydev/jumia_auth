@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:jumia_auth/constants/error_handling.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:jumia_auth/constants/utils.dart';
+import 'package:jumia_auth/features/auth/email/email_login.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,7 +69,13 @@ class AuthService {
           response: res,
           context: context,
           onSuccess: () {
-            showSnackbar(context, 'email exist go to login');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EmailSignin(
+                        authEmail: email,
+                      )),
+            );
           });
     } catch (e) {
       showSnackbar(context, e.toString());

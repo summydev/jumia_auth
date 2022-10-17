@@ -33,8 +33,8 @@ authRouter.post("/api/authemail", async (req, res) => {
   try {
     const { email } = req.body;
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ msg: "email doesn't exist" });
+    if (!existingUser) {
+      return res.status(400).json({ msg: "user email doesnt exist" });
     }
   } catch (e) {}
 });
