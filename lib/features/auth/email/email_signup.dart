@@ -68,10 +68,7 @@ class _EmailSignupState extends State<EmailSignup> {
                     ),
                     Text(
                       'Create your account',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: GlobalVariables.kHeaderText,
                     ),
                     SizedBox(
                       height: 12,

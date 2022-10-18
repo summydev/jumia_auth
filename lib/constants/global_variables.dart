@@ -16,4 +16,8 @@ class GlobalVariables {
   static const Color greyBackgroundCOlor = Color.fromARGB(255, 204, 205, 207);
   static var selectedNavBarColor = Colors.cyan[800]!;
   static const unselectedNavBarColor = Colors.black87;
+  static const kHeaderText = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
@@ -57,10 +58,7 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                     ),
                     Text(
                       'What\'s your email address?',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: GlobalVariables.kHeaderText,
                     ),
                     SizedBox(
                       height: 12,

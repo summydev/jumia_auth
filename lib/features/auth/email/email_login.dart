@@ -57,10 +57,7 @@ class _EmailSigninState extends State<EmailSignin> {
                     ),
                     Text(
                       'Welcome back!!!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: GlobalVariables.kHeaderText,
                     ),
                     SizedBox(
                       height: 12,

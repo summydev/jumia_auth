@@ -68,3 +68,58 @@ class IdentityContainer extends StatelessWidget {
     );
   }
 }
+
+// class DatePickerTextFormField extends StatefulWidget {
+//   const DatePickerTextFormField({required}) ;
+
+//   @override
+//   State<DatePickerTextFormField> createState() =>
+//       _DatePickerTextFormFieldState();
+// }
+
+// class _DatePickerTextFormFieldState extends State<DatePickerTextFormField> {
+//   late DateTime date;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       //keyboardType: TextInputType.datetime,
+//       decoration: InputDecoration(
+//           border: OutlineInputBorder(
+//             borderSide: BorderSide(color: GlobalVariables.secondaryColor),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderSide: BorderSide(color: GlobalVariables.greyBackgroundCOlor),
+//           ),
+//           label: Text(
+//             '$date',
+//             style: TextStyle(color: GlobalVariables.secondaryColor),
+//           ),
+//           hintStyle: TextStyle(
+//             color: Colors.grey,
+//           ),
+//           prefixIcon: IconButton(
+//             icon: Icon(Icons.calendar_today),
+//             onPressed: () async {
+//               DateTime? newDate = await showDatePicker(
+//                 context: context,
+//                 initialDate: date,
+//                 firstDate: DateTime(1900),
+//                 lastDate: DateTime(2000),
+//               );
+//               if (newDate == null) return null;
+//               setState(() {
+//                 date = newDate;
+//               });
+//             },
+//           ),
+//           hintText: '${date.year}/${date.month}/${date.day}'),
+//       validator: (val) {
+//         if (val == null || val.isEmpty) {
+//           return '$date';
+//         }
+//         return null;
+//       },
+//     );
+//   }
+// }
