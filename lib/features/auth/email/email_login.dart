@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
+import 'package:jumia_auth/features/auth/email/auth_email.dart';
 
 class EmailSignin extends StatefulWidget {
   static const routeName = '/emailsignin';
@@ -14,6 +15,21 @@ class EmailSignin extends StatefulWidget {
 
 class _EmailSigninState extends State<EmailSignin> {
   final TextEditingController _passwordcontroller = TextEditingController();
+  final _signInFormKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.authEmail);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _passwordcontroller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,17 +78,44 @@ class _EmailSigninState extends State<EmailSignin> {
                     SizedBox(
                       height: 40,
                     ),
-                    IdentityContainer(
-                        identityInfo: widget.authEmail, onTap: () {}),
-                    SizedBox(
-                      height: 30,
+                    Container(
+                      child: Form(
+                        key: _signInFormKey,
+                        child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            IdentityContainer(
+                                identityInfo: widget.authEmail,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AuthEmailScreen()),
+                                  );
+                                }),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            CustomTextField(
+                              controller: _passwordcontroller,
+                              hintText: 'Password',
+                              keyboardType: TextInputType.visiblePassword,
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    CustomTextField(
-                        controller: _passwordcontroller, hintText: 'Password'),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    CustomButton(onTap: () {}, text: 'Login'),
+                    CustomButton(
+                        onTap: () {
+                          if (_signInFormKey.currentState!.validate()) {
+                            // signUpUser();
+                          }
+                        },
+                        text: 'Login'),
                     TextButton(
                       onPressed: () {},
                       child: Text(

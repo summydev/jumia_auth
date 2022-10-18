@@ -67,7 +67,8 @@ class AuthService {
       );
 
       print(res.statusCode);
-      if (200== res.statusCode) {
+      if (res.statusCode == 200) {
+        // print(res.statusCode);
         Navigator.push(
           context,
           MaterialPageRoute(

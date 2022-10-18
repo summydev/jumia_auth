@@ -93,6 +93,7 @@ class _EmailSignupState extends State<EmailSignup> {
                       child: Form(
                         key: _signUpFormKey,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             IdentityContainer(
                                 identityInfo: widget.authEmail,
@@ -108,14 +109,18 @@ class _EmailSignupState extends State<EmailSignup> {
                               height: 30,
                             ),
                             CustomTextField(
-                                controller: _passwordcontroller,
-                                hintText: 'Password'),
+                              controller: _passwordcontroller,
+                              hintText: 'Password',
+                              keyboardType: TextInputType.visiblePassword,
+                            ),
                             SizedBox(
                               height: 30,
                             ),
                             CustomTextField(
-                                controller: _passwordcontroller,
-                                hintText: 'Confirm Password'),
+                              controller: _passwordcontroller,
+                              hintText: 'Confirm Password',
+                              keyboardType: TextInputType.visiblePassword,
+                            ),
                             SizedBox(
                               height: 30,
                             ),

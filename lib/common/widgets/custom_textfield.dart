@@ -3,12 +3,17 @@ import 'package:jumia_auth/constants/global_variables.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final TextInputType keyboardType;
   final String hintText;
-  const CustomTextField({required this.controller, required this.hintText});
+  const CustomTextField(
+      {required this.controller,
+      required this.hintText,
+      required this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
@@ -48,12 +53,15 @@ class IdentityContainer extends StatelessWidget {
       height: 50,
       color: Color(0xffeeeeee),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(identityInfo),
-            TextButton(onPressed: onTap, child: Text('Edit'))
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: TextButton(onPressed: onTap, child: Text('Edit')),
+            )
           ],
         ),
       ),

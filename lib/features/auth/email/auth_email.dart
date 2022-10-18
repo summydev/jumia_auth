@@ -82,10 +82,12 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                       child: Form(
                         key: _authEmailFormKey,
                         child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             CustomTextField(
+                              
                                 controller: _emailcontroller,
-                                hintText: 'Email'),
+                                hintText: 'Email', keyboardType: TextInputType.emailAddress,),
                             SizedBox(
                               height: 40,
                             ),
