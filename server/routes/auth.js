@@ -32,15 +32,14 @@ authRouter.post("/api/email/signup", async (req, res) => {
 authRouter.post("/api/authemail", async (req, res) => {
   try {
     const { email } = req.body;
+
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       return res
         .status(400)
         .json({ msg: "user email doesn't exist. Please signup" });
-    }else{
-      return res
-        .status(200)
-        .json({ msg: "user email exists. Please login" });
+    } else {
+      return res.status(200).json({ msg: "user email exists. Please login" });
     }
   } catch (e) {
     print(e);

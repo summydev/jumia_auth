@@ -13,7 +13,7 @@ class morePersonalDetails extends StatefulWidget {
 class _morePersonalDetailsState extends State<morePersonalDetails> {
   final TextEditingController _gendercontroller = TextEditingController();
   final _morepersonaldetailsFormKey = GlobalKey<FormState>();
-  late DateTime date = DateTime(2022, 05, 03);
+  late DateTime date = DateTime(24, 05, 2022);
   @override
   void dispose() {
     // TODO: implement dispose
@@ -77,7 +77,7 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                             height: 30,
                           ),
                           TextFormField(
-                            //keyboardType: TextInputType.datetime,
+                            keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -112,24 +112,12 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                                 //   },
                                 // ),
                                 hintText:
-                                    '${date.year}/${date.month}/${date.day}'),
+                                    '${date.day}/${date.month}/${date.year}'),
                             validator: (val) {
                               if (val == null || val.isEmpty) {
                                 return '${date.year}/${date.month}/${date.day}';
                               }
                               return null;
-                            },
-                            onTap: () async {
-                              DateTime? newDate = await showDatePicker(
-                                context: context,
-                                initialDate: date,
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2000),
-                              );
-                              if (newDate == null) return null;
-                              setState(() {
-                                date = newDate;
-                              });
                             },
                           ),
                           SizedBox(

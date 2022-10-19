@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 
 class PersonalDetails extends StatefulWidget {
   const PersonalDetails({Key? key}) : super(key: key);
@@ -14,7 +15,11 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   final TextEditingController _firstNamecontroller = TextEditingController();
   final TextEditingController _middleNamecontroller = TextEditingController();
   final TextEditingController _lastNamecontroller = TextEditingController();
+    final TextEditingController _phonecontroller = TextEditingController();
   final _personaldetailsFormKey = GlobalKey<FormState>();
+  final countryPicker = const FlCountryCodePicker();
+  //CountryCode? code;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +86,11 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           controller: _lastNamecontroller,
                           hintText: 'Last Name',
                           keyboardType: TextInputType.name),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      CustomTextField(controller: _phonecontroller, hintText: "phone number", keyboardType: TextInputType.phone),
+                      
                       SizedBox(
                         height: 30,
                       ),

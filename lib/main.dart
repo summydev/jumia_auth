@@ -37,7 +37,9 @@ class _MyAppState extends State<MyApp> {
               elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
       onGenerateRoute: (settings) => generateRoute(settings),
       //initialRoute: '/',
-      home: morePersonalDetails(),
+      home:
+          //more
+          PersonalDetails(),
       // routes: {
       //   '/': (context) => AuthEmailScreen(),
       //   '/api/email/signup': (context) => EmailSignup(
