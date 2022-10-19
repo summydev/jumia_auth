@@ -45,5 +45,36 @@ authRouter.post("/api/authemail", async (req, res) => {
     print(e);
   }
 });
+authRouter.post("/api/email/signup-details", async (req, res) => {
+  try {
+    const { email, firstName, middleName, lastName, phoneNumber } = req.body;
+    const updateUser = await User.updateOne(
+      { email: email },
+      {
+        $set: {
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName,
+          phoneNumber: phoneNumber,
+        },
+        // { middleName: middleName },
+        // { lastName: lastName },
+        // { phoneNumber: phoneNumber },
+      },
+      function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("update susccesful");
+        }
+      }
+    );
+    updateUser.save();
+
+    // res.json(user);
+  } catch (e) {
+    print(e);
+  }
+});
 
 module.exports = authRouter;
