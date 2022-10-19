@@ -3,9 +3,12 @@ import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+import 'package:jumia_auth/features/services/auth_services.dart';
 
 class PersonalDetails extends StatefulWidget {
-  const PersonalDetails({Key? key}) : super(key: key);
+  static const routeName = '/emailsignup-personaldetails';
+  final String authEmail;
+  const PersonalDetails({required this.authEmail});
 
   @override
   State<PersonalDetails> createState() => _PersonalDetailsState();
@@ -15,10 +18,39 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   final TextEditingController _firstNamecontroller = TextEditingController();
   final TextEditingController _middleNamecontroller = TextEditingController();
   final TextEditingController _lastNamecontroller = TextEditingController();
-    final TextEditingController _phonecontroller = TextEditingController();
+  final TextEditingController _phonecontroller = TextEditingController();
   final _personaldetailsFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   final countryPicker = const FlCountryCodePicker();
   //CountryCode? code;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print(widget.authEmail);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    _firstNamecontroller.dispose();
+    _middleNamecontroller.dispose();
+    _lastNamecontroller.dispose();
+    _phonecontroller.dispose();
+  }
+
+  void addPersonalDetails() {
+    authService.addPersonalDetails(
+        context: context,
+        email: widget.authEmail,
+        firstName: _firstNamecontroller.text,
+        middleName: _middleNamecontroller.text,
+        lastName: _lastNamecontroller.text,
+        phoneNumber: _phonecontroller.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +121,10 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       SizedBox(
                         height: 30,
                       ),
-                      CustomTextField(controller: _phonecontroller, hintText: "phone number", keyboardType: TextInputType.phone),
-                      
+                      CustomTextField(
+                          controller: _phonecontroller,
+                          hintText: "phone number",
+                          keyboardType: TextInputType.phone),
                       SizedBox(
                         height: 30,
                       ),
@@ -98,7 +132,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           onTap: () {
                             if (_personaldetailsFormKey.currentState!
                                 .validate()) {
-                              // signUpUser();
+                              addPersonalDetails();
                             }
                           },
                           text: 'Continue'),

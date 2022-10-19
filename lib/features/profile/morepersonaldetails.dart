@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
+import 'package:jumia_auth/features/services/auth_services.dart';
 
 class morePersonalDetails extends StatefulWidget {
-  const morePersonalDetails({Key? key}) : super(key: key);
+  static const routeName = '/emailsignup-personaldetails-more';
+  final String authEmail;
+  const morePersonalDetails({required this.authEmail});
 
   @override
   State<morePersonalDetails> createState() => _morePersonalDetailsState();
@@ -12,13 +15,31 @@ class morePersonalDetails extends StatefulWidget {
 
 class _morePersonalDetailsState extends State<morePersonalDetails> {
   final TextEditingController _gendercontroller = TextEditingController();
+  final TextEditingController _birthdaycontroller = TextEditingController();
   final _morepersonaldetailsFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   late DateTime date = DateTime(24, 05, 2022);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print(widget.authEmail);
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     _gendercontroller.dispose();
+  }
+
+  void addPersonalDetailsMore() {
+    authService.addMorePersonalDetails(
+        context: context,
+        email: widget.authEmail,
+        gender: _gendercontroller.text,
+        birthDay: _birthdaycontroller.text);
   }
 
   @override
@@ -96,21 +117,6 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                                 hintStyle: TextStyle(
                                   color: Colors.grey,
                                 ),
-                                // prefixIcon: IconButton(
-                                //   icon: Icon(Icons.calendar_today),
-                                //   onPressed: () async {
-                                //     DateTime? newDate = await showDatePicker(
-                                //       context: context,
-                                //       initialDate: date,
-                                //       firstDate: DateTime(1900),
-                                //       lastDate: DateTime(2000),
-                                //     );
-                                //     if (newDate == null) return null;
-                                //     setState(() {
-                                //       date = newDate;
-                                //     });
-                                //   },
-                                // ),
                                 hintText:
                                     '${date.day}/${date.month}/${date.year}'),
                             validator: (val) {
@@ -126,9 +132,7 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                           CustomButton(
                               onTap: () {
                                 if (_morepersonaldetailsFormKey.currentState!
-                                    .validate()) {
-                                  // signUpUser();
-                                }
+                                    .validate()) {}
                               },
                               text: 'Continue'),
                         ],

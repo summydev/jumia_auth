@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       //initialRoute: '/',
       home:
           //more
-          PersonalDetails(),
+          PersonalDetails(authEmail: '',),
       // routes: {
       //   '/': (context) => AuthEmailScreen(),
       //   '/api/email/signup': (context) => EmailSignup(
