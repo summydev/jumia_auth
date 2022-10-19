@@ -51,6 +51,18 @@ const userSchema = mongoose.Schema({
   },
   birthDay: {
     // required: true,
+
+    type: Date,
+
+    // trim: true,
+
+    validate: {
+      validator: (value) => {
+        const re = /^\d\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/;
+        return value.match(re);
+      },
+      message: "please enter a valid date of birth",
+    },
     type: String,
   },
   pin: {
