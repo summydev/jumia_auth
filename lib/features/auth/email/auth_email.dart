@@ -29,7 +29,7 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _emailcontroller.dispose();
+    // _emailcontroller.dispose();
   }
 
   @override
@@ -80,12 +80,13 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                       child: Form(
                         key: _authEmailFormKey,
                         child: Column(
-                             crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             CustomTextField(
-                              
-                                controller: _emailcontroller,
-                                hintText: 'Email', keyboardType: TextInputType.emailAddress,),
+                              controller: _emailcontroller,
+                              hintText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                            ),
                             SizedBox(
                               height: 40,
                             ),
@@ -93,7 +94,9 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                                 onTap: () {
                                   if (_authEmailFormKey.currentState!
                                       .validate()) {
+                                    print('pressed');
                                     checkUser();
+                                    print('pressed2');
                                   }
                                   // Navigator.push(
                                   //   context,

@@ -74,7 +74,7 @@ class AuthService {
 
       print(res.statusCode);
       if (res.statusCode == 200) {
-        // print(res.statusCode);
+        print("login please");
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -83,6 +83,7 @@ class AuthService {
                   )),
         );
       } else {
+        print("signup please");
         Navigator.push(
           context,
           MaterialPageRoute(
