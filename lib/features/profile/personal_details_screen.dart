@@ -3,6 +3,7 @@ import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+import 'package:jumia_auth/features/profile/morepersonaldetails.dart';
 import 'package:jumia_auth/features/services/auth_services.dart';
 
 class PersonalDetails extends StatefulWidget {
@@ -42,15 +43,15 @@ class _PersonalDetailsState extends State<PersonalDetails> {
     _phonecontroller.dispose();
   }
 
-  void addPersonalDetails() {
-    authService.addPersonalDetails(
-        context: context,
-        email: widget.authEmail,
-        firstName: _firstNamecontroller.text,
-        middleName: _middleNamecontroller.text,
-        lastName: _lastNamecontroller.text,
-        phoneNumber: _phonecontroller.text);
-  }
+  // void addPersonalDetails() {
+  //   authService.addPersonalDetails(
+  //       context: context,
+  //       email: widget.authEmail,
+  //       firstName: _firstNamecontroller.text,
+  //       middleName: _middleNamecontroller.text,
+  //       lastName: _lastNamecontroller.text,
+  //       phoneNumber: _phonecontroller.text);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +133,13 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           onTap: () {
                             if (_personaldetailsFormKey.currentState!
                                 .validate()) {
-                              addPersonalDetails();
+                              morePersonalDetails(
+                                authEmail: widget.authEmail,
+                                firstName: _firstNamecontroller.text,
+                                middleName: _middleNamecontroller.text,
+                                lastName: _lastNamecontroller.text,
+                                phoneNumber: _phonecontroller.text,
+                              );
                             }
                           },
                           text: 'Continue'),

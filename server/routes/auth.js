@@ -47,7 +47,7 @@ authRouter.post("/api/authemail", async (req, res) => {
 });
 authRouter.post("/api/email/signup-details", async (req, res) => {
   try {
-    const { email, firstName, middleName, lastName, phoneNumber } = req.body;
+    const { email, firstName, middleName, lastName, phoneNumber,  gender, birthDay  } = req.body;
     const updateUser = await User.updateOne(
       { email: email },
       {
@@ -56,6 +56,8 @@ authRouter.post("/api/email/signup-details", async (req, res) => {
           middleName: middleName,
           lastName: lastName,
           phoneNumber: phoneNumber,
+          gender: gender,
+          birthDay: birthDay,
         },
         // { middleName: middleName },
         // { lastName: lastName },
@@ -73,32 +75,34 @@ authRouter.post("/api/email/signup-details", async (req, res) => {
 
     // res.json(user);
   } catch (e) {
-    print(e);
+    console.log(e);
   }
 });
-authRouter.post("/api/email/signup-details-more", async (req, res) => {
-  try {
-    const { email, gender, birthDay } = req.body;
-    const updateUsermore = await User.updateOne(
-      { email: email },
-      {
-        $set: {
-          gender: gender,
-          birthDay: birthDay,
-        },
-      },
-      function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("update susccesful");
-        }
-      }
-    );
-    updateUsermore.save();
+// authRouter.post("/api/email/signup-details-more", async (req, res) => {
+//   try {
+//     const { email, gender, birthDay } = req.body;
+//     const updateUsermore = await User.updateOne(
+//       { email: email },
+//       {
+//         $set: {
+//           gender: gender,
+//           birthDay: birthDay,
+//         },
+//       },
+//       function (err) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log("updated susccesfulyl");
+//         }
+//       }
+//     );
+//     updateUsermore.save();
 
-    // res.json(user);
-  } catch (e) {}
-});
+//     // res.json(user);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 module.exports = authRouter;

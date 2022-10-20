@@ -104,6 +104,8 @@ class AuthService {
     required String middleName,
     required String lastName,
     required String phoneNumber,
+    required String gender,
+    required String birthDay,
   }) async {
     try {
       http.Response res = await http.post(
@@ -113,41 +115,7 @@ class AuthService {
           'firstName': firstName,
           'middleName': middleName,
           'lastName': lastName,
-          'phoneNumber': phoneNumber
-        }),
-        headers: <String, String>{
-          "Content-Type": "application/json; charset=UTF-8",
-          //"Access-Control-Allow-Origin": "*",
-        },
-      );
-
-      print(res.statusCode);
-      if (res.statusCode == 200) {
-        // print(res.statusCode);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => morePersonalDetails(authEmail: email)),
-        );
-      } else {
-        showSnackbar(context, 'something went wrong');
-      }
-    } catch (e) {
-      showSnackbar(context, e.toString());
-    }
-  }
-
-  void addMorePersonalDetails({
-    required BuildContext context,
-    required String email,
-    required String gender,
-    required String birthDay,
-  }) async {
-    try {
-      http.Response res = await http.post(
-        Uri.parse('$uri/api/email/signup-details-more'),
-        body: jsonEncode({
-          'email': email,
+          'phoneNumber': phoneNumber,
           'gender': gender,
           'birthDay': birthDay,
         }),
@@ -165,7 +133,6 @@ class AuthService {
           MaterialPageRoute(
               builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
         );
-        showSnackbar(context, 'redirecting you');
       } else {
         showSnackbar(context, 'something went wrong');
       }
@@ -173,4 +140,41 @@ class AuthService {
       showSnackbar(context, e.toString());
     }
   }
+
+  // void addMorePersonalDetails({
+  //   required BuildContext context,
+  //   required String email,
+  //   required String gender,
+  //   required String birthDay,
+  // }) async {
+  //   try {
+  //     http.Response res = await http.post(
+  //       Uri.parse('$uri/api/email/signup-details-more'),
+  //       body: jsonEncode({
+  //         'email': email,
+  //         'gender': gender,
+  //         'birthDay': birthDay,
+  //       }),
+  //       headers: <String, String>{
+  //         "Content-Type": "application/json; charset=UTF-8",
+  //         //"Access-Control-Allow-Origin": "*",
+  //       },
+  //     );
+
+  //     print(res.statusCode);
+  //     if (res.statusCode == 200) {
+  //       // print(res.statusCode);
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
+  //       );
+  //       showSnackbar(context, 'redirecting you');
+  //     } else {
+  //       showSnackbar(context, 'something went wrong');
+  //     }
+  //   } catch (e) {
+  //     showSnackbar(context, e.toString());
+  //   }
+  // }
 }

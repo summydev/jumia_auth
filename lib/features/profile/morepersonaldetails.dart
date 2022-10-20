@@ -7,7 +7,16 @@ import 'package:jumia_auth/features/services/auth_services.dart';
 class morePersonalDetails extends StatefulWidget {
   static const routeName = '/emailsignup-personaldetails-more';
   final String authEmail;
-  const morePersonalDetails({required this.authEmail});
+  final String firstName;
+  final String middleName;
+  final String lastName;
+  final String phoneNumber;
+  const morePersonalDetails(
+      {required this.authEmail,
+      required this.firstName,
+      required this.middleName,
+      required this.lastName,
+      required this.phoneNumber});
 
   @override
   State<morePersonalDetails> createState() => _morePersonalDetailsState();
@@ -34,12 +43,17 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
     _gendercontroller.dispose();
   }
 
-  void addPersonalDetailsMore() {
-    authService.addMorePersonalDetails(
-        context: context,
-        email: widget.authEmail,
-        gender: _gendercontroller.text,
-        birthDay: _birthdaycontroller.text);
+  void addPersonalDetails() {
+    authService.addPersonalDetails(
+      context: context,
+      email: widget.authEmail,
+      gender: _gendercontroller.text,
+      birthDay: _birthdaycontroller.text,
+      phoneNumber: widget.phoneNumber,
+      firstName: widget.firstName,
+      middleName: widget.middleName,
+      lastName: widget.lastName,
+    );
   }
 
   @override
@@ -132,7 +146,9 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                           CustomButton(
                               onTap: () {
                                 if (_morepersonaldetailsFormKey.currentState!
-                                    .validate()) {}
+                                    .validate()) {
+                                  addPersonalDetails();
+                                }
                               },
                               text: 'Continue'),
                         ],
