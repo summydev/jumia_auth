@@ -3,6 +3,7 @@ import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 
 class AccountCreatedScreen extends StatefulWidget {
+  static const routeName = '/accountcreated';
   final String firstName;
   const AccountCreatedScreen({required this.firstName});
 
@@ -10,15 +11,15 @@ class AccountCreatedScreen extends StatefulWidget {
   State<AccountCreatedScreen> createState() => _AccountCreatedScreenState();
 }
 
-
 class _AccountCreatedScreenState extends State<AccountCreatedScreen> {
-    @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     print(widget.firstName);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

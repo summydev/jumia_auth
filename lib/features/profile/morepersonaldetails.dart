@@ -112,6 +112,7 @@ class _morePersonalDetailsState extends State<morePersonalDetails> {
                             height: 30,
                           ),
                           TextFormField(
+                            controller: _birthdaycontroller,
                             keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(

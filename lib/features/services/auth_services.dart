@@ -11,6 +11,7 @@ import 'package:jumia_auth/features/auth/email/email_signup.dart';
 import 'package:jumia_auth/features/profile/account_created_screen.dart';
 import 'package:jumia_auth/features/profile/morepersonaldetails.dart';
 import 'package:jumia_auth/features/profile/personal_details_screen.dart';
+import 'package:jumia_auth/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -138,6 +139,50 @@ class AuthService {
       }
     } catch (e) {
       showSnackbar(context, e.toString());
+    }
+  }
+
+  void signInUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      http.Response res = await http.post(Uri.parse('$uri/api/email/signin'),
+          body: jsonEncode({
+            'email': email,
+            'password': password,
+          }),
+          headers: <String, String>{
+            "Content-Type":"application/json; charset=UTF-8",
+
+
+          });
+           print(res.statusCode);
+           httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+            await prefs.setString(
+                'x-auth-token', jsonDecode(res.body)['token']);
+            Navigator.pushNamedAndRemoveUntil(
+                context, AccountCreatedScreen.routeName, (route) => false);
+          });
+      // if (res.statusCode == 200) {
+      //   // print(res.statusCode);
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
+      //   );
+      //   showSnackbar(context, 'redirecting you');
+      // } else {
+      //   showSnackbar(context, 'something went wrong');
+      // }
+    } catch (e) {
+        showSnackbar(context, e.toString());
     }
   }
 

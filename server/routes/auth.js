@@ -47,7 +47,15 @@ authRouter.post("/api/authemail", async (req, res) => {
 });
 authRouter.post("/api/email/signup-details", async (req, res) => {
   try {
-    const { email, firstName, middleName, lastName, phoneNumber,  gender, birthDay  } = req.body;
+    const {
+      email,
+      firstName,
+      middleName,
+      lastName,
+      phoneNumber,
+      gender,
+      birthDay,
+    } = req.body;
     const updateUser = await User.updateOne(
       { email: email },
       {
@@ -76,6 +84,26 @@ authRouter.post("/api/email/signup-details", async (req, res) => {
     // res.json(user);
   } catch (e) {
     console.log(e);
+  }
+});
+
+authRouter.post("/api/email/sigin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "user with the email does not exist" });
+    }
+    const isMatch = await bcryptjs.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Incorrect Password" });
+    }
+    const token = jwt.sign({ id: user._id }, "passwordKey");
+    res.json({ token, ...user._doc });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 });
 // authRouter.post("/api/email/signup-details-more", async (req, res) => {

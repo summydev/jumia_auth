@@ -133,13 +133,18 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           onTap: () {
                             if (_personaldetailsFormKey.currentState!
                                 .validate()) {
-                              morePersonalDetails(
-                                authEmail: widget.authEmail,
-                                firstName: _firstNamecontroller.text,
-                                middleName: _middleNamecontroller.text,
-                                lastName: _lastNamecontroller.text,
-                                phoneNumber: _phonecontroller.text,
-                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => morePersonalDetails(
+                                            authEmail: widget.authEmail,
+                                            firstName:
+                                                _firstNamecontroller.text,
+                                            middleName:
+                                                _middleNamecontroller.text,
+                                            lastName: _lastNamecontroller.text,
+                                            phoneNumber: _phonecontroller.text,
+                                          )));
                             }
                           },
                           text: 'Continue'),

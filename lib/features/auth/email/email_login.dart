@@ -3,6 +3,7 @@ import 'package:jumia_auth/common/widgets/custom_textfield.dart';
 import 'package:jumia_auth/common/widgets/custon_button.dart';
 import 'package:jumia_auth/constants/global_variables.dart';
 import 'package:jumia_auth/features/auth/email/auth_email.dart';
+import 'package:jumia_auth/features/services/auth_services.dart';
 
 class EmailSignin extends StatefulWidget {
   static const routeName = '/emailsignin';
@@ -16,6 +17,7 @@ class EmailSignin extends StatefulWidget {
 class _EmailSigninState extends State<EmailSignin> {
   final TextEditingController _passwordcontroller = TextEditingController();
   final _signInFormKey = GlobalKey<FormState>();
+  AuthService authService = AuthService();
 
   @override
   void initState() {
@@ -29,6 +31,13 @@ class _EmailSigninState extends State<EmailSignin> {
     // TODO: implement dispose
     super.dispose();
     _passwordcontroller.dispose();
+  }
+
+  void SignUserIn() {
+    authService.signInUser(
+        context: context,
+        email: widget.authEmail,
+        password: _passwordcontroller.text);
   }
 
   @override
@@ -79,7 +88,7 @@ class _EmailSigninState extends State<EmailSignin> {
                       child: Form(
                         key: _signInFormKey,
                         child: Column(
-                             crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             IdentityContainer(
                                 identityInfo: widget.authEmail,
@@ -109,7 +118,7 @@ class _EmailSigninState extends State<EmailSignin> {
                     CustomButton(
                         onTap: () {
                           if (_signInFormKey.currentState!.validate()) {
-                            // signUpUser();
+                            SignUserIn();
                           }
                         },
                         text: 'Login'),
