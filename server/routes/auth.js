@@ -87,7 +87,7 @@ authRouter.post("/api/email/signup-details", async (req, res) => {
   }
 });
 
-authRouter.post("/api/email/sigin", async (req, res) => {
+authRouter.post("/api/email/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
