@@ -106,31 +106,5 @@ authRouter.post("/api/email/signin", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-// authRouter.post("/api/email/signup-details-more", async (req, res) => {
-//   try {
-//     const { email, gender, birthDay } = req.body;
-//     const updateUsermore = await User.updateOne(
-//       { email: email },
-//       {
-//         $set: {
-//           gender: gender,
-//           birthDay: birthDay,
-//         },
-//       },
-//       function (err) {
-//         if (err) {
-//           console.log(err);
-//         } else {
-//           console.log("updated susccesfulyl");
-//         }
-//       }
-//     );
-//     updateUsermore.save();
-
-//     // res.json(user);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
 
 module.exports = authRouter;

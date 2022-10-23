@@ -154,12 +154,10 @@ class AuthService {
             'password': password,
           }),
           headers: <String, String>{
-            "Content-Type":"application/json; charset=UTF-8",
-
-
+            "Content-Type": "application/json; charset=UTF-8",
           });
-           print(res.statusCode);
-           httpErrorHandle(
+      print(res.statusCode);
+      httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () async {
@@ -170,56 +168,19 @@ class AuthService {
             Navigator.pushNamedAndRemoveUntil(
                 context, AccountCreatedScreen.routeName, (route) => false);
           });
-      // if (res.statusCode == 200) {
-      //   // print(res.statusCode);
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
-      //   );
-      //   showSnackbar(context, 'redirecting you');
-      // } else {
-      //   showSnackbar(context, 'something went wrong');
-      // }
+      if (res.statusCode == 200) {
+        print(res.statusCode);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
+        );
+        showSnackbar(context, 'redirecting you');
+      } else {
+        showSnackbar(context, 'something went wrong');
+      }
     } catch (e) {
-        showSnackbar(context, e.toString());
+      showSnackbar(context, e.toString());
     }
   }
-
-  // void addMorePersonalDetails({
-  //   required BuildContext context,
-  //   required String email,
-  //   required String gender,
-  //   required String birthDay,
-  // }) async {
-  //   try {
-  //     http.Response res = await http.post(
-  //       Uri.parse('$uri/api/email/signup-details-more'),
-  //       body: jsonEncode({
-  //         'email': email,
-  //         'gender': gender,
-  //         'birthDay': birthDay,
-  //       }),
-  //       headers: <String, String>{
-  //         "Content-Type": "application/json; charset=UTF-8",
-  //         //"Access-Control-Allow-Origin": "*",
-  //       },
-  //     );
-
-  //     print(res.statusCode);
-  //     if (res.statusCode == 200) {
-  //       // print(res.statusCode);
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //             builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
-  //       );
-  //       showSnackbar(context, 'redirecting you');
-  //     } else {
-  //       showSnackbar(context, 'something went wrong');
-  //     }
-  //   } catch (e) {
-  //     showSnackbar(context, e.toString());
-  //   }
-  // }
 }
