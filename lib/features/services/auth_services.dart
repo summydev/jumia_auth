@@ -173,7 +173,7 @@ class AuthService {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => AccountCreatedScreen(firstName: 'RAndom')),
+              builder: (context) =>AccountCreatedScreen(firstName: 'RAndom')),
         );
         showSnackbar(context, 'redirecting you');
       } else {
