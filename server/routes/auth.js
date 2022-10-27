@@ -12,7 +12,7 @@ authRouter.post("/api/email/signup", async (req, res) => {
     if (existingUser) {
       return res
         .status(400)
-        .json({ msg: "Error! user eith same email already exists!!" });
+        .json({ msg: "Error! user with same email already exists!!" });
     }
 
     const hashedPassword = await bcryptjs.hash(password, 8);
@@ -67,18 +67,14 @@ authRouter.post("/api/email/signup-details", async (req, res) => {
           gender: gender,
           birthDay: birthDay,
         },
-        // { middleName: middleName },
-        // { lastName: lastName },
-        // { phoneNumber: phoneNumber },
-      },
-      function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("update susccesful");
-        }
       }
-    );
+    ).then(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("update susccesful");
+      }
+    });
     updateUser.save();
 
     // res.json(user);
