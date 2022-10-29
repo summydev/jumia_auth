@@ -69,7 +69,7 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                         fontSize: 16,
 
                         color: GlobalVariables.greyBackgroundCOlor,
-                        // fontWeight: FontWeight.w500,
+                       
                       ),
                       textAlign: TextAlign.center,
                     ),
