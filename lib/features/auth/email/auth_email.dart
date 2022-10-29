@@ -67,9 +67,7 @@ class _AuthEmailScreenState extends State<AuthEmailScreen> {
                       'Type your email to log in or create a jumia account.',
                       style: TextStyle(
                         fontSize: 16,
-
                         color: GlobalVariables.greyBackgroundCOlor,
-                       
                       ),
                       textAlign: TextAlign.center,
                     ),
