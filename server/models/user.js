@@ -54,7 +54,7 @@ const userSchema = mongoose.Schema({
 
     type: Date,
 
-    // trim: true,
+   
 
     validate: {
       validator: (value) => {
